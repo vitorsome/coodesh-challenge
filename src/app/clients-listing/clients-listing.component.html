@@ -1,0 +1,16 @@
+<table class="table">
+  <thead>
+    <th>Name</th>
+    <th>Gender</th>
+    <th>Birth</th>
+    <th>Address</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let client of clients">
+      <td>{{ client.name }}</td>
+      <td>{{ client.gender | titlecase}}</td>
+      <td>{{ client.birth | date }}</td>
+      <td>{{ client.address}}</td>
+    </tr>
+  </tbody>
+</table>
