@@ -1,4 +1,4 @@
-import { ClientsServer, Result } from './../interfaces/client-server';
+import { FilterService } from './../services/filter.service';
 import { ClientsService } from './../services/clients.service';
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../models/client';
@@ -6,18 +6,35 @@ import { Client } from '../models/client';
 @Component({
   selector: 'app-clients-listing',
   templateUrl: './clients-listing.component.html',
-  styleUrls: ['./clients-listing.component.scss']
+  styles: [`
+
+  `]
 })
 export class ClientsListingComponent implements OnInit {
-
   clients: any[] = [];
+  page: number = 1;
 
-  constructor(private clientsService: ClientsService) { }
+  constructor(private clientsService: ClientsService, private filterService :FilterService) {
+    this.filterService.changeEmitted.subscribe(form => {
+      this.onSubmitSearch(form);
+    });
+  }
 
   ngOnInit(): void {
-    this.clientsService.getClients().subscribe((data :Client[]) => {
+    this.clientsService.getClients(this.page).subscribe((data :Client[]) => {
       this.clients = data;
     });
   }
+
+  onSubmitSearch(search :any) {
+    this.clients = this.clients.map((client :Client) => {
+      client.hidden = false;
+      if (search.search != '') {
+        client.hidden = client.getName().indexOf(search.search) == -1;
+      }
+      return client;
+    });
+  }
+
 
 }

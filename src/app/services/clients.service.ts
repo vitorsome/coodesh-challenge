@@ -10,17 +10,21 @@ import { Client } from '../models/client';
 export class ClientsService {
   private url = 'https://randomuser.me/api/';
   private returnFields = ['picture', 'name', 'email', 'gender',  'dob', 'phone', 'nat', 'location', 'id'];
+  private RESULTS_PER_PAGE = 10;
+  private PAGE = 1;
+
+  // /?page=3&results=10&seed=abc
 
   constructor(private http: HttpClient) {}
 
-  getClients(){
-    return this.http.get<ClientsServer>(this.url, {params:this.queryString(this.returnFields)}).pipe(
+  getClients(page :number, search :string = ''){
+    return this.http.get<ClientsServer>(this.url, {params:this.queryString(this.returnFields, page)}).pipe(
       map((resultApi :ClientsServer) => {
         return resultApi.results.map((client) => {
           return new Client(
             client.id.value,`${client.name.title}. ${client.name.first} ${client.name.last}`,client.email,
             client.gender,client.dob.date,client.phone,
-            client.nat, client.location.street.name);
+            client.nat, client.location.street.name, false);
         })
       }),
       catchError( error => {
@@ -29,7 +33,7 @@ export class ClientsService {
     );
   }
 
-  private queryString(queryArray: string[]) :HttpParams {
-    return new HttpParams({fromString:`inc=${queryArray.join()}`});
+  private queryString(queryArray: string[], page: number) :HttpParams {
+    return new HttpParams({fromString:`inc=${queryArray.join()}&results=${this.RESULTS_PER_PAGE}&seed=bar&page=${this.PAGE}`});
   }
 }
