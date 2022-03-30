@@ -1,18 +1,23 @@
 <form-search></form-search>
-<table class="table">
-  <thead>
-    <th>Name</th>
-    <th>Gender</th>
-    <th>Birth</th>
-    <th>Address</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let client of clients" [hidden]="client.hidden == true">
-      <td>{{ client.name }}</td>
-      <td>{{ client.gender | titlecase}}</td>
-      <td>{{ client.birth | date }}</td>
-      <td>{{ client.address}}</td>
-    </tr>
-  </tbody>
-</table>
-
+<div class="table-container">
+  <table class="table">
+    <thead>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Birth</th>
+      <th>Address</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clients" [hidden]="client.hidden == true">
+        <td>{{ client.name }}</td>
+        <td>{{ client.gender | titlecase}}</td>
+        <td>{{ client.birth | date }}</td>
+        <td>{{ client.address}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <loading-spinner [loading]="this.loading"></loading-spinner>
+</div>
+<div class="d-flex justify-content-center">
+  <pagination [page]="this.page"></pagination>
+</div>

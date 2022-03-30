@@ -11,13 +11,9 @@ export class ClientsService {
   private url = 'https://randomuser.me/api/';
   private returnFields = ['picture', 'name', 'email', 'gender',  'dob', 'phone', 'nat', 'location', 'id'];
   private RESULTS_PER_PAGE = 10;
-  private PAGE = 1;
-
-  // /?page=3&results=10&seed=abc
-
   constructor(private http: HttpClient) {}
 
-  getClients(page :number, search :string = ''){
+  getClients(page :number){
     return this.http.get<ClientsServer>(this.url, {params:this.queryString(this.returnFields, page)}).pipe(
       map((resultApi :ClientsServer) => {
         return resultApi.results.map((client) => {
@@ -34,6 +30,6 @@ export class ClientsService {
   }
 
   private queryString(queryArray: string[], page: number) :HttpParams {
-    return new HttpParams({fromString:`inc=${queryArray.join()}&results=${this.RESULTS_PER_PAGE}&seed=bar&page=${this.PAGE}`});
+    return new HttpParams({fromString:`inc=${queryArray.join()}&results=${this.RESULTS_PER_PAGE}&seed=bar&page=${page}`});
   }
 }

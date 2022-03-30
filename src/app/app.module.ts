@@ -13,6 +13,8 @@ import { InputSearchComponent } from './input-search/input-search.component';
 import { ButtonSearchComponent } from './button-search/button-search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormSearchComponent } from './clients-listing/form-search/form-search.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { FormSearchComponent } from './clients-listing/form-search/form-search.c
     ClientsListingComponent,
     InputSearchComponent,
     ButtonSearchComponent,
-    FormSearchComponent
+    FormSearchComponent,
+    PaginationComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
