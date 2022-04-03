@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Client } from '../models/client';
 
 @Component({
@@ -10,7 +11,7 @@ export class ClientDetailsModalComponent implements OnInit {
 
   public client? :Client;
 
-  constructor() { }
+  constructor(public activeModal :NgbActiveModal) { }
 
   ngOnInit(): void {}
 
