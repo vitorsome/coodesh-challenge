@@ -1,3 +1,9 @@
 .table-container {
   position: absolute;
 }
+
+.table {
+  tr {
+    cursor: pointer;
+  }
+}

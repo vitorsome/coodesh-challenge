@@ -15,6 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormSearchComponent } from './clients-listing/form-search/form-search.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { LoadingComponent } from './loading/loading.component';
+import { ClientDetailsModalComponent } from './client-details-modal/client-details-modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,14 +26,16 @@ import { LoadingComponent } from './loading/loading.component';
     ButtonSearchComponent,
     FormSearchComponent,
     PaginationComponent,
-    LoadingComponent
+    LoadingComponent,
+    ClientDetailsModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [HttpClient, FilterService],
   bootstrap: [AppComponent]

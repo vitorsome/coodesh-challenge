@@ -3,20 +3,22 @@ import { FilterService } from './../services/filter.service';
 import { ClientsService } from './../services/clients.service';
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../models/client';
+import { ClientDetailsModalComponent } from '../client-details-modal/client-details-modal.component';
 
 @Component({
   selector: 'app-clients-listing',
   templateUrl: './clients-listing.component.html',
-  styles: [`
-
-  `]
+  styles: [``]
 })
 export class ClientsListingComponent implements OnInit {
   clients: any[] = [];
   page: number = 1;
   loading :boolean = false;
 
-  constructor(private clientsService: ClientsService, private filterService :FilterService, private paginationService :PaginationService) {
+  constructor(
+    private clientsService: ClientsService,
+    private filterService :FilterService,
+    private paginationService :PaginationService) {
     this.filterService.changeEmitted.subscribe(form => {
       this.onSubmitSearch(form);
     });
@@ -51,6 +53,10 @@ export class ClientsListingComponent implements OnInit {
       }
       return client;
     });
+  }
+
+  clientDetails() {
+
   }
 
 

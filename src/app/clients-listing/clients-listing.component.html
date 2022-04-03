@@ -8,7 +8,7 @@
       <th>Address</th>
     </thead>
     <tbody>
-      <tr *ngFor="let client of clients" [hidden]="client.hidden == true">
+      <tr *ngFor="let client of clients" [hidden]="client.hidden == true" (click)="clientDetails()">
         <td>{{ client.name }}</td>
         <td>{{ client.gender | titlecase}}</td>
         <td>{{ client.birth | date }}</td>
