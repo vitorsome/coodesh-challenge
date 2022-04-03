@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Client } from '../models/client';
 
 @Component({
   selector: 'client-details-modal',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./client-details-modal.component.scss']
 })
 export class ClientDetailsModalComponent implements OnInit {
+
+  public client? :Client;
 
   constructor() { }
 

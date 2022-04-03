@@ -4,11 +4,19 @@ import { ClientsService } from './../services/clients.service';
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../models/client';
 import { ClientDetailsModalComponent } from '../client-details-modal/client-details-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-clients-listing',
   templateUrl: './clients-listing.component.html',
-  styles: [``]
+  styles: [`
+    .table-container {
+      .table {
+        tr {
+          cursor: pointer;
+        }
+      }
+    }`]
 })
 export class ClientsListingComponent implements OnInit {
   clients: any[] = [];
@@ -18,7 +26,8 @@ export class ClientsListingComponent implements OnInit {
   constructor(
     private clientsService: ClientsService,
     private filterService :FilterService,
-    private paginationService :PaginationService) {
+    private paginationService :PaginationService,
+    private modalService :NgbModal) {
     this.filterService.changeEmitted.subscribe(form => {
       this.onSubmitSearch(form);
     });
@@ -55,8 +64,11 @@ export class ClientsListingComponent implements OnInit {
     });
   }
 
-  clientDetails() {
-
+  clientDetails(client :Client) {
+    const modalRef = this.modalService.open(ClientDetailsModalComponent, {
+      backdrop : false,
+    });
+    modalRef.componentInstance.client = client;
   }
 
 

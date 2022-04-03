@@ -20,7 +20,8 @@ export class ClientsService {
           return new Client(
             client.id.value,`${client.name.title}. ${client.name.first} ${client.name.last}`,client.email,
             client.gender,client.dob.date,client.phone,
-            client.nat, client.location.street.name, false);
+            client.nat, client.location.street.name, client.location.street.number,
+            client.location.city, client.picture.medium, false);
         })
       }),
       catchError( error => {
@@ -30,6 +31,6 @@ export class ClientsService {
   }
 
   private queryString(queryArray: string[], page: number) :HttpParams {
-    return new HttpParams({fromString:`inc=${queryArray.join()}&results=${this.RESULTS_PER_PAGE}&seed=bar&page=${page}`});
+    return new HttpParams({fromString:`inc=${queryArray.join()}&results=${this.RESULTS_PER_PAGE}&seed=bar&page=${page}&nat=br`});
   }
 }
